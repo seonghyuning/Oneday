@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>원데이 클래스</title>
+</head>
+<style>
+    h1 > a {
+        text-decoration: none;
+        color: black;
+    }
+    #atag {
+        text-decoration: none;
+        color: gray;
+    }
+</style>
+<script th:inline="javascript">
+    function search() {
+        let onedayName = document.getElementById("oneday_name").value;
+        let form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/board/search");
+        let input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", "onedayName");
+        input.setAttribute("value", onedayName);
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
+    function baking() {
+        location.href=/*[[@{/category(page=1)}]]*/""; 
+    }
+    function perfume() {
+        location.href=/*[[@{/category(page=2)}]]*/""; 
+    }   
+    function drawing() {
+        location.href=/*[[@{/category(page=3)}]]*/"";  
+    }
+    function dance() {
+        location.href=/*[[@{/category(page=4)}]]*/"";  
+    }
+    function date() {
+        location.href=/*[[@{/category(page=5)}]]*/"";  
+    }
+</script>
+<body>
+    <h1><a th:href="@{/main}">원데이 클래스</a></h1>
+    <table align="center">
+        <tr>
+            <td>
+                <input align="center" type="text" id="oneday_name" placeholder="클래스 찾기">
+                <input type="button" value="검색" onclick="search()">
+            </td>
+        </tr>
+    </table>
+    <div align="right">
+        <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/login}">로그인</a>
+        <label sec:authorize="isAuthenticated()">[[${#authentication.getPrincipal().getUsername()}]]님</label>
+        <a id="atag" sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
+        <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/join}">회원가입</a>
+    </div>
+    <hr />
+    <div align="center">
+        <h2>카테고리</h2>
+        <button onclick="baking()">베이킹</button>
+        <button onclick="perfume()">향수</button>
+        <button onclick="drawing()">드로잉</button>
+        <button onclick="dance()">댄스</button>
+        <button onclick="date()">데이트</button>
+    </div>
+    <br>
+    <table align="center">
+        <tbody th:if="${#strings.isEmpty(onedayList)}">
+            <tr align="center">
+                <td>
+                    <p>해당 클래스가 존재하지 않습니다.</p>
+                </td>
+            </tr>
+        </tbody>
+        <tbody th:unless="${#strings.isEmpty(onedayList)}">
+            <!-- onedayList의 값이 하나씩 꺼내져서 oneday에 넣어짐 -->
+            <tr align="center">
+                <td th:each="oneday:${onedayList}">
+                    <img th:if="${oneday.category.id == 1}" th:src="@{/img/그림1.png}" alt="베이킹" width="250px" height="250px" />
+                    <img th:if="${oneday.category.id == 2}" th:src="@{/img/그림3.jpg}" alt="향수" width="250px" height="250px" />
+                    <img th:if="${oneday.category.id == 3}" th:src="@{/img/그림2.png}" alt="드로잉" width="250px" height="250px" />
+                    <img th:if="${oneday.category.id == 4}" th:src="@{/img/그림1.png}" alt="댄스" width="250px" height="250px" />
+                    <img th:if="${oneday.category.id == 5}" th:src="@{/img/그림1.png}" alt="데이트" width="250px" height="250px" />
+                    <!-- <img th:src="@{/img/그림1.png}" th:alt="${oneday.category.name}" /> -->
+                    <p>[[${oneday.category.name}]]</p>
+                    <b>[[${oneday.location}]]</b>
+                    <p>[[${oneday.name}]]</p>
+                    <button align="right">예약하기</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <table align="center">
+        <tr>
+            <td>
+                <img src="./img/그림1.png" alt="베이킹" />
+                <p>쿠킹</p>
+                <b>[성북구] 쿠킹 스튜디오</b>
+                <p>홈 베이킹 쿠키 만들기 원데이 클래스</p>
+                <button align="right">예약하기</button>
+            </td>
+            <td>
+                <img src="./img/그림2.png" alt="드로잉" />
+                <p>드로잉</p>
+                <b>[광진구] 드로잉 스튜디오</b>
+                <p>꾸덕꾸덕 오일 파스텔 원데이 클래스</p>
+                <button align="right">예약하기</button>
+            </td>
+            <td>
+                <img src="./img/그림3.jpg" alt="향수" />
+                <p>향수</p>
+                <b>[성동구] 향수 스튜디오</b>
+                <p>나만의 향기 만들기 원데이 클래스</p>
+                <button align="right">예약하기</button>
+            </td>
+        </tr>
+    </table> -->
+</body>
+</html>
