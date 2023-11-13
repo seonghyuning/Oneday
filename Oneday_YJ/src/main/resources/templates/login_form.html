@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+</head>
+<style>
+    table, td {
+        border-collapse: collapse;
+    }
+    h1 > a {
+        text-decoration: none;
+        color: black;
+    }
+    #atag {
+        text-decoration: none;
+        color: gray;
+    }
+</style>
+<body>
+    <h1><a th:href="@{/main}">원데이 클래스</a></h1>
+    <table align="center">
+        <tr>
+            <td>
+                <input align="center" type="text" id="oneday_name" placeholder="클래스 찾기">
+                <input type="button" value="검색" onclick="search()">
+            </td>
+        </tr>
+    </table>
+    <div align="right">
+        <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/login}">로그인</a>
+        <label sec:authorize="isAuthenticated()">[[${#authentication.getPrincipal().getUsername()}]]님</label>
+        <a id="atag" sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
+        <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/join}">회원가입</a>
+    </div>
+    <hr />
+    <form th:action="@{/auth/login}" name="loginForm" method="post">
+        <!-- 시큐리티의 로그인이 실패할 경우에는 로그인 페이지로 다시 리다이렉트된다. 이때 페이지 파라미터로 error가 함께 전달 -->
+        <!-- 로그인 페이지의 파라미터로 error가 전달될 경우 "사용자 ID 또는 비밀번호를 확인해주세요." 라는 오류메시지를 출력 -->
+        <div th:if="${param.error}" align="center">
+            <div>
+                사용자 ID 또는 비밀번호를 확인해주세요.
+            </div>
+        </div>
+        <h1 align="center">Log In</h1>
+        <table align="center">
+            <tr>
+                <td>ID</td>
+                <td><input type="text" name="username" id="username"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password" id="password"></td>
+            </tr>
+        </table>
+        <br>
+        <table align="center">
+            <tr>
+                <td><input type="submit" value="로그인"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
