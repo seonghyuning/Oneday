@@ -69,6 +69,12 @@ public class UserController {
 	public String login(Model model, Principal principal) {
 		return "login_form";
 	}
+	
+
+	@GetMapping("/login2") 
+	public String login2(Model model, Principal principal) {
+		return "login_form";
+	}
 }
 
 
