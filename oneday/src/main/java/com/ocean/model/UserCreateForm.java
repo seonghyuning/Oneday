@@ -11,7 +11,7 @@ public class UserCreateForm {
 	@NotEmpty(message="이름을 입력해주세요.")	// 비어있으면 이 메시지 띄워줌
 	private String nickname;
 	
-	@Size(min=5, max=20)
+	@Size(min=5, max=20, message="사용자 아이디를 5 ~ 20자 사이로 입력해주세요.")
 	@NotEmpty(message="사용자 아이디를 입력해주세요.")
 	private String username;	// 중복체크
 	

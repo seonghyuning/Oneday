@@ -21,7 +21,7 @@ public class User {
 	@Id
 	// @GeneratedValue, @Column은 세트
 	@GeneratedValue(strategy=GenerationType.IDENTITY)	// auto_increment
-	@Column(nullable = false)	 // DB에 컬럼명을 이것으로 만들어 줌. 디폴트값: 필드명=컬럼명
+	@Column(nullable = false)
 	private int id;
 	
 	@Column(unique=true, length=50, nullable = false)	 // column을 unique 키로 설정
