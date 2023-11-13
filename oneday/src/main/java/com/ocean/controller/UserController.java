@@ -70,8 +70,8 @@ public class UserController {
 		return "login_form";
 	}
 	
-	@GetMapping("/login3") 
-	public String login3(Model model, Principal principal) {
+	@GetMapping("/login4") 
+	public String login4(Model model, Principal principal) {
 		return "login_form";
 	}
 }
