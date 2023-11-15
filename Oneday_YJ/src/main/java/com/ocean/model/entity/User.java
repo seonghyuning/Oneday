@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,4 +54,5 @@ public class User {
 	@CreationTimestamp	// default값: 현재 시간
 	@Column(nullable = false)
 	private LocalDateTime createDate;
+
 }

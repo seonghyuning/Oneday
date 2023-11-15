@@ -1,69 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
     <title>원데이 클래스</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}" />
 </head>
-<style>
-    h1>a {
-        text-decoration: none;
-        color: black;
-    }
-
-    #atag {
-        text-decoration: none;
-        color: gray;
-    }
-</style>
-<script th:inline="javascript">
-    function search() {
-        let onedayName = document.getElementById("oneday_name").value;
-        let form = document.createElement("form");
-        form.setAttribute("method", "post");
-        form.setAttribute("action", "/board/search");
-        let input = document.createElement("input");
-        input.setAttribute("type", "hidden");
-        input.setAttribute("name", "onedayName");
-        input.setAttribute("value", onedayName);
-        form.appendChild(input);
-        document.body.appendChild(form);
-        form.submit();
-    }
-    function baking() {
-        location.href =/*[[@{/category(page=1)}]]*/"";
-    }
-    function perfume() {
-        location.href =/*[[@{/category(page=2)}]]*/"";
-    }
-    function drawing() {
-        location.href =/*[[@{/category(page=3)}]]*/"";
-    }
-    function dance() {
-        location.href =/*[[@{/category(page=4)}]]*/"";
-    }
-    function date() {
-        location.href =/*[[@{/category(page=5)}]]*/"";
-    }
-</script>
-
 <body>
-    <h1><a th:href="@{/main}">원데이 클래스</a></h1>
-    <table align="center">
-        <tr>
-            <td>
-                <input align="center" type="text" id="oneday_name" placeholder="클래스 찾기">
-                <input type="button" value="검색" onclick="search()">
-            </td>
-        </tr>
-    </table>
-    <div align="right">
-        <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/login}">로그인</a>
-        <label sec:authorize="isAuthenticated()">[[${#authentication.getPrincipal().getUsername()}]]님</label>
-        <a id="atag" sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
-        <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/join}">회원가입</a>
+    <div class="header-container">
+        <div>
+            <a th:href="@{/main}"><img id="logo" th:src="@{/img/logo.png}"></a>
+        </div>
+        <div>
+			<input type="text" id="oneday_name" placeholder="클래스 찾기">
+            <input type="button" value="검색" onclick="search()">
+		</div>
+        <div>
+            <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/login}">로그인</a>
+            <label sec:authorize="isAuthenticated()">[[${#authentication.getPrincipal().getUsername()}]]님</label>
+            <a id="atag" sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
+            <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/join}">회원가입</a>
+        </div>
     </div>
-    <hr />
+    <hr/>
     <div align="center">
         <h2>카테고리</h2>
         <button onclick="baking()">베이킹</button>
@@ -99,31 +58,6 @@
             </td>
         </tr>
     </table>
-
-    <!--
-    <table align="center">
-        <tbody th:if="${#strings.isEmpty(onedayList)}">
-            <tr align="center">
-                <td>
-                    <p>해당 클래스가 존재하지 않습니다.</p>
-                </td>
-            </tr>
-        </tbody>
-        <tbody th:unless="${#strings.isEmpty(onedayList)}"> -->
-    <!-- onedayList의 값이 하나씩 꺼내져서 oneday에 넣어짐 -->
-    <!---
-            <tr align="center">
-                <td th:each="oneday:${onedayList}">
-                    <img src="./img/그림1.png" th:alt="${oneday.category.name}" />
-                    <p>[[${oneday.category.name}]]</p>
-                    <b>[[${oneday.location}]]</b>
-                    <p>[[${oneday.name}]]</p>
-                    <button align="right">예약하기</button>
-                </td>
-            </tr>
-        </tbody>
-    </table> -->
-
+    <script type="text/javascript" src="/js/category.js"></script>
 </body>
-
 </html>

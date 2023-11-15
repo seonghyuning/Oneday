@@ -4,49 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>원데이 클래스</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}" />
+    <script type="text/javascript" th:src="@{../js/category.js}" ></script>
 </head>
-<style>
-    h1>a {
-        text-decoration: none;
-        color: black;
-    }
-
-    #atag {
-        text-decoration: none;
-        color: gray;
-    }
-</style>
-<script th:inline="javascript">
-    function search() {
-        let onedayName = document.getElementById("oneday_name").value;
-        let form = document.createElement("form");
-        form.setAttribute("method", "post");
-        form.setAttribute("action", "/board/search");
-        let input = document.createElement("input");
-        input.setAttribute("type", "hidden");
-        input.setAttribute("name", "onedayName");
-        input.setAttribute("value", onedayName);
-        form.appendChild(input);
-        document.body.appendChild(form);
-        form.submit();
-    }
-    function baking() {
-        location.href =/*[[@{/category(page=1)}]]*/"";
-    }
-    function perfume() {
-        location.href =/*[[@{/category(page=2)}]]*/"";
-    }
-    function drawing() {
-        location.href =/*[[@{/category(page=3)}]]*/"";
-    }
-    function dance() {
-        location.href =/*[[@{/category(page=4)}]]*/"";
-    }
-    function date() {
-        location.href =/*[[@{/category(page=5)}]]*/"";
-    }
-</script>
-
 <body>
     <h1><a th:href="@{/main}">원데이 클래스</a></h1>
     <table align="center">

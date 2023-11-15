@@ -71,9 +71,9 @@ public class UserController {
 	}
 	
 
-	@GetMapping("/login2") 
-	public String login2(Model model, Principal principal) {
-		return "login_form";
+	@GetMapping("/mypage") 
+	public String mypage() {
+		return "mypage";
 	}
 }
 

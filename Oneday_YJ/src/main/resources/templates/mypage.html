@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Page</title>
+	<link rel="stylesheet" th:href="@{/css/menu.css}" />
+</head>
+<body>
+    <h1><a th:href="@{/main}">원데이 클래스</a></h1>
+    <table align="center">
+        <tr>
+            <td>
+                <input align="center" type="text" id="oneday_name" placeholder="클래스 찾기">
+                <input type="button" value="검색" onclick="search()">
+            </td>
+        </tr>
+    </table>
+    <div align="right">
+        <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/login}">로그인</a>
+        <label sec:authorize="isAuthenticated()">[[${#authentication.getPrincipal().getUsername()}]]님</label>
+        <a id="atag" sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
+        <a id="atag" sec:authorize="isAnonymous()" th:href="@{/auth/join}">회원가입</a>
+    </div>
+    <hr />
+	<div>
+		<div>
+			<p>1</p>
+		</div>
+		<div>
+			<div>
+				<p>2-1</p>
+			</div>
+			<div>
+				<p>2-2</p>
+			</p>
+		</div>
+		
+	</div>
+
+</body>
+</html>
