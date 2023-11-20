@@ -1,0 +1,16 @@
+.table-container {
+    text-align: center;
+}
+
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: auto;
+  }
+  th, td {
+    padding: 10px;
+  }
+
+h2 {
+    text-align: center;
+}

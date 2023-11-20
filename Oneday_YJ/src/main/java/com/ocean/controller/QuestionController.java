@@ -1,34 +1,50 @@
 package com.ocean.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ocean.service.OnedayService;
+import com.ocean.model.entity.Oneday;
+import com.ocean.model.entity.Question;
 import com.ocean.service.QuestionService;
 
 @Controller
-@RequestMapping("/qusetion")
+@RequestMapping("/question")
 public class QuestionController {
-	
+
 	@Autowired
-	QuestionService questionService;
-	
-	@GetMapping({"","/"})
-	public String question(@RequestParam(value = "id", defaultValue ="0") int id, Model model) {
-		model.addAttribute("question", questionService.findQuestionById(id));
-		return "/question/form";
-	}
-	
-	@GetMapping("/list")
-	public String list(@PageableDefault Pageable pageable, Model model) {
-		model.addAttribute("questionList", questionService.findQuestionList(pageable));
-		return "question/list";
-				
-	}
-	
+    private QuestionService questionService;
+
+	@Autowired
+	private OnedayService onedayService;
+
+	@GetMapping("/form")
+    public String showQuestionForm(Model model) {
+        List<Oneday> onedayList = onedayService.getAllOnedayList();
+        model.addAttribute("question", new Question());
+        model.addAttribute("onedayList", onedayList);
+        return "/question/form";
+    }
+
+    @PostMapping("/add")
+    public String addQuestion(@ModelAttribute Question question) {
+        questionService.addQuestion(question);
+        return "redirect:/question/list";
+    }
+    
+
+    @GetMapping("/list")
+    public String showQuestionList(Model model) {
+        List<Question> questions = questionService.getQuestionsByCurrentUser();
+        model.addAttribute("questions", questions);
+        return "question/list";
+    }
+    
 }

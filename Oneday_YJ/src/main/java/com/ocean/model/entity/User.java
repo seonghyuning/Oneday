@@ -54,5 +54,5 @@ public class User {
 	@CreationTimestamp	// default값: 현재 시간
 	@Column(nullable = false)
 	private LocalDateTime createDate;
-
+	
 }

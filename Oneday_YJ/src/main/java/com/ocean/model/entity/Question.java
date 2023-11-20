@@ -1,19 +1,23 @@
 package com.ocean.model.entity;
   
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity; 
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
   
 @Getter 
+@Setter
 @NoArgsConstructor
 @Entity
 @Table 
@@ -23,16 +27,16 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
   
-	@Column
+	@Column(length=100, name="question_title", nullable = false)
 	private String question_title;
   
-	@Column 
+	@Column(length=100, name="question_content", nullable = false)
 	private String question_content;
   
-	@Column 
+	@Column(name="question_date", nullable = false)
 	private LocalDateTime question_date;
   
-	@Column 
+	@Column(name="question_mdate", nullable = false)
 	private LocalDateTime question_mdate;
   
 	@ManyToOne(fetch = FetchType.LAZY) 
@@ -41,14 +45,9 @@ public class Question {
 	@ManyToOne(fetch = FetchType.LAZY) 
 	private Oneday oneday;
 	
-	@Builder
-	public Question(String question_title, String question_content, LocalDateTime question_date, LocalDateTime question_mdate, User user, Oneday oneday) {
-		this.question_title = question_title;
-		this.question_content = question_content;
-		this.question_date = question_date;
-		this.question_mdate = question_mdate;
-		this.user = user;
-		this.oneday = oneday;
-	}
+	public String getOnedayName() {
+        return (oneday != null) ? oneday.getName() : null;
+    }
+
 }
  

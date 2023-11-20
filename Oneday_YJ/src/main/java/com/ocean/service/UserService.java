@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -63,4 +65,13 @@ public class UserService {
 			throw new DataNotFoundException("user not found");
 		}
 	}
+	
+	 public Integer getUserId() {
+	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	        if (authentication != null && authentication.isAuthenticated()) {
+	            String username = authentication.getName();
+	            return userRepository.findByUsername(username).map(User::getId).orElse(null);
+	        }
+	        return null;
+	    }
 }

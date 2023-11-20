@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>마이페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>질문 등록</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" th:href="@{/css/menu.css}" />
+    <link rel="stylesheet" th:href="@{/css/questionform.css}" />
 </head>
 <body>
-    <div class="header-container">
+	<div class="header-container">
         <div>
             <a th:href="@{/main}"><img id="logo" th:src="@{/img/logo.png}"></a>
         </div>
@@ -23,7 +24,8 @@
 			  </a>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 			    <li><a class="dropdown-item" th:href="@{/question/list}">문의글</a></li>
-			    <li><a class="dropdown-item" href="#">Another action</a></li>
+			    <li><a class="dropdown-item" th:href="@{/addquestion}">문의글 등록</a></li>
+			    <li><a class="dropdown-item" href="#">my Page</a></li>
 			    <li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a></li>
 			  </ul>
 			</div>
@@ -32,21 +34,22 @@
         </div>
     </div>
     <hr/>
-	<div>
-		<div>
-			<p>1</p>
-		</div>
-		<div>
-			<div>
-				<p>2-1</p>
-			</div>
-			<div>
-				<p>2-2</p>
-			</p>
-		</div>
-		
+	<div class="question_form">
+		<h2>질문 등록</h2>
+    	<form th:object="${question}" th:action="@{/questions/add}" method="post">
+		    <label for="oneday">클래스 이름: </label>
+		    
+		    <select id="oneday" name="oneday" th:field="*{oneday}">
+		        <option th:each="oneday : ${onedayList}" th:value="${oneday.id}" th:text="${oneday.name}"></option>
+		    </select>
+		    <label for="question_title">문의 제목: </label>
+		    <input type="text" id="question_title" name="question_title" th:field="*{question_title}" required>
+		    <!-- 다른 입력 필드 추가 가능... -->
+		    <br>
+		    <textarea id="question_content" name="question_content" th:field="*{question_content}" required ></textarea>
+			<br>
+		    <button type="submit">작성 완료</button>
+		</form>
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/js/category.js"></script>
 </body>
 </html>

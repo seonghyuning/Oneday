@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,5 +53,5 @@ public class Oneday {
 	@CreationTimestamp
 	@Column(name="oneday_mdate")
 	private LocalDateTime mdate;
-	
+
 }

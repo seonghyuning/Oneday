@@ -18,6 +18,7 @@ table, td {
 }
 hr {
 	width: 80%;
+	margin: 0px auto;
 }
 .header-container {
     display: flex;

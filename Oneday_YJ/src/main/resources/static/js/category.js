@@ -12,17 +12,17 @@ function search() {
         form.submit();
     }
 function baking() {
-    location.href =/*[[@{/category(page=1)}]]*/"";
+    location.href = '/category?page=1';
 }
 function perfume() {
-    location.href =/*[[@{/category(page=2)}]]*/"";
+    location.href = '/category?page=2';
 }
 function drawing() {
-    location.href =/*[[@{/category(page=3)}]]*/"";
+    location.href = '/category?page=3';
 }
 function dance() {
-    location.href =/*[[@{/category(page=4)}]]*/"";
+    location.href = '/category?page=4';
 }
 function date() {
-    location.href =/*[[@{/category(page=5)}]]*/"";
+    location.href = '/category?page=5';
 }
